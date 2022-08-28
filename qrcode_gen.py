@@ -11,7 +11,13 @@ qr_code = qrcode.QRCode(
 
 database = sqlite3.connect('product.db')
 print("Connected succesfully !")
-    
+
+database.execute(''' CREATE TABLE PRODUCT 
+                 (ID     INT     PRIMARY KEY     NOT NULL,
+                 NAME   TEXT                    NOT NULL);
+                 ''')
+
+database.close()
 
 
 qr_code.add_data('Some data')
