@@ -17,19 +17,24 @@ print("Connected succesfully !")
 
 database.execute(''' CREATE TABLE IF NOT EXISTS PRODUCT 
                  (ID     INT     PRIMARY KEY     NOT NULL,
-                 NAME   TEXT                    NOT NULL);
+                 NAME   TEXT                    NOT NULL,
+                 UNIQUE(ID, NAME));
                  ''')
 
-database.execute("INSERT INTO PRODUCT (ID, NAME) \
+database.execute("INSERT OR IGNORE INTO PRODUCT (ID, NAME) \
                 VALUES (1, 'iPhone XS')")
 
-database.execute("INSERT INTO PRODUCT (ID, NAME) \
+database.execute("INSERT OR IGNORE INTO PRODUCT (ID, NAME) \
                 VALUES (2, 'iPhone Xr')")
 
-database.execute("INSERT INTO PRODUCT (ID, NAME) \
+database.execute("INSERT OR IGNORE INTO PRODUCT (ID, NAME) \
                 VALUES (3, 'Samsung Galaxy S22 Ultra')")
 
+database.execute("INSERT OR IGNORE INTO PRODUCT (ID, NAME) \
+                VALUES (4, 'Google Pixel 6')")
+
 database.commit()
+print("Record commited successfully")
 
 database.close()
 
