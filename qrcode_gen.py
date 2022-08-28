@@ -9,13 +9,27 @@ qr_code = qrcode.QRCode(
     border = 10,
 )
 
-database = sqlite3.connect('product.db')
+if os.path.exists('product.db'):
+    print("Database exists")
+
+database = sqlite3.connect('product.db', timeout=1000)
 print("Connected succesfully !")
 
-database.execute(''' CREATE TABLE PRODUCT 
+database.execute(''' CREATE TABLE IF NOT EXISTS PRODUCT 
                  (ID     INT     PRIMARY KEY     NOT NULL,
                  NAME   TEXT                    NOT NULL);
                  ''')
+
+database.execute("INSERT INTO PRODUCT (ID, NAME) \
+                VALUES (1, 'iPhone XS')")
+
+database.execute("INSERT INTO PRODUCT (ID, NAME) \
+                VALUES (2, 'iPhone Xr')")
+
+database.execute("INSERT INTO PRODUCT (ID, NAME) \
+                VALUES (3, 'Samsung Galaxy S22 Ultra')")
+
+database.commit()
 
 database.close()
 
