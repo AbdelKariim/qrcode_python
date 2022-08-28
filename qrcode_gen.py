@@ -1,5 +1,6 @@
 import qrcode 
 import os 
+import sqlite3
 
 qr_code = qrcode.QRCode(
     version = 1,
@@ -7,6 +8,11 @@ qr_code = qrcode.QRCode(
     box_size = 50,
     border = 10,
 )
+
+database = sqlite3.connect('product.db')
+print("Connected succesfully !")
+    
+
 
 qr_code.add_data('Some data')
 qr_code.make(fit=True)
